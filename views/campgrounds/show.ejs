@@ -9,7 +9,12 @@
         <p class="card-text"><%= campground.description %></p>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item text-muted"><%= campground.location %></li>
+        <li class="list-group-item text-muted">
+          <%= campground.location %>
+          <span class="float-end"
+            >Submitted by <%= campground.author.username %></span
+          >
+        </li>
         <li class="list-group-item">
           $<%= campground.price.toFixed(2) %>/night
         </li>
