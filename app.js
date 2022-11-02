@@ -40,15 +40,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
 
 const sessionConfig = {
+  name: 'session',
   secret: 'thisshouldbeabettersecret!',
   resave: false,
   saveUninitialized: true,
   cookie: {
     expires: Date.now() + 1000*60*60*24*7,
     maxAge: 1000*60*60*24*7,
-    httpOnly: true
+    httpOnly: true,
+    // secure: true
   }
 };
+if (process.env.NODE_ENV === 'production') {
+  sessionConfig.cookie.secure = true;
+}
+
 app.use(session(sessionConfig));
 app.use(flash());
 
